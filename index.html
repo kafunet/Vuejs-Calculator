@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <section class="output">
+        <h1><pre>{{current}}</pre></h1>
+         <h2><pre>{{total}}<span v-if="selected"> {{selected}}</span></pre></h2>
+        </section>
+        
+          <section class="modifiers">
+            
+          <button v-on:click="current = 0, total = 0, selected = null">AC</button>
+          <button v-on:click="current = -current">+/-</button>
+          <button v-on:click="current = Number(current) * 0.01 ">%</button>
+        
+        </section>
+        
+        <section class="operators">
+        <button v-for="operator in operators"
+                v-on:click="calculate(operator)">{{operator}}</button>
+        <button v-on:click="calculate()">=</button>
+        </section>
+      <section class="digits">
+       <button v-for="digit in [...Array(10).keys()]"
+               v-on:click=" current === 0 ? current = String(digit) : current += digit" >
+         {{digit}}
+        </button>
+        <button v-on:click="current.toString(),indexOf('.')== -1 ? current += '.': null">.</button>
+        </section>
+      </div>
+      <script src="index.js"></script>
+</body>
+</html>
